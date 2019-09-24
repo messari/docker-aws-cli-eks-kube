@@ -26,6 +26,11 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION
   && tar --strip=1 -xzf *.tar.gz linux-386/helm -C /usr/local/bin \
   && rm *.tar.gz
 
+ENV HELM_HOME=/usr/local/helm
+RUN apk add --no-cache bash git \
+&& mkdir -p /usr/local/helm/plugins \
+&& helm plugin install https://github.com/futuresimple/helm-secrets --version 2.0.2
+
 ADD docker-entrypoint.sh /aws/docker-entrypoint.sh
 
 ENTRYPOINT ["/aws/docker-entrypoint.sh"]
