@@ -1,6 +1,6 @@
 # messari/aws-cli-eks-kube
 
-A aws-cli, eks, kubectl, and helm docker image. Intended for CI/CD usage.
+A aws-cli, eks, kubectl, helm + helm-secrets docker image. Intended for CI/CD usage.
 
 ## Setup
 
