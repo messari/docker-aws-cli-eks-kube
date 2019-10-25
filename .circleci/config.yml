@@ -11,12 +11,12 @@ references:
         only: /.*/
       tags:
         only: /.*/
-  semver_tag_only: &semver_tag_only
+  any_tag: &any_tag
     filters:
       branches:
         ignore: /.*/
       tags:
-        only: /^[0-9]*\.[0-9]*\.[0-9]*$/
+        only: /.*/
 
 workflows:
   build-and-publish-docker-image:
