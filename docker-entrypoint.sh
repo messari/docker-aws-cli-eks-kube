@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-aws eks --region us-east-1 update-kubeconfig --name $EKS_NAME
+aws eks --region $AWS_REGION update-kubeconfig --name $EKS_NAME
 
 exec "$@"
