@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/messari/docker-aws-cli-eks-kube.svg?style=svg)](https://circleci.com/gh/messari/docker-aws-cli-eks-kube)
+
 # messari/aws-cli-eks-kube
 
 A aws-cli, eks, kubectl, helm + helm-secrets docker image. Intended for CI/CD usage.
