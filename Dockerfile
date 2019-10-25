@@ -2,8 +2,11 @@ FROM python:alpine
 
 ARG CLI_VERSION=1.16.138
 
+RUN apk add --no-cache bash=5.0.11-r0
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # aws-cli for configuring k8 auth
-RUN apk -uv add --no-cache curl groff jq less && \
+RUN apk -uv add --no-cache curl=7.66.0-r0 groff=1.22.4-r0 jq=1.6-r0 less=551-r0 && \
     pip install --no-cache-dir awscli==$CLI_VERSION
 
 WORKDIR /aws
@@ -14,23 +17,23 @@ RUN chmod +x ./aws-iam-authenticator
 RUN mv aws-iam-authenticator /usr/local/bin
 
 # kubectl
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN "curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN chmod +x ./kubectl
 RUN mv kubectl /usr/local/bin
 
 # helm
-ENV HELM_VERSION=2.13.1
+ENV HELM_VERSION=2.15.1
 ENV HELM_SHASUM="b90303f1b4e867e23dd0a5b0a663dfb5eb3b60d8b4196072bb9ca2bee7bf0637  helm-v${HELM_VERSION}-linux-386.tar.gz"
 RUN curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-386.tar.gz \
   && echo "${HELM_SHASUM}" | sha256sum -c \
-  && tar --strip=1 -xzf *.tar.gz linux-386/helm -C /usr/local/bin \
-  && rm *.tar.gz
+  && tar --strip=1 -xzf ./*.tar.gz linux-386/helm -C /usr/local/bin \
+  && rm ./*.tar.gz
 
 ENV HELM_HOME=/usr/local/helm
-RUN apk add --no-cache bash git \
+RUN apk add --no-cache git=2.22.0-r0 \
 && mkdir -p /usr/local/helm/plugins \
 && helm plugin install https://github.com/futuresimple/helm-secrets --version 2.0.2
 
-ADD docker-entrypoint.sh /aws/docker-entrypoint.sh
+COPY docker-entrypoint.sh /aws/docker-entrypoint.sh
 
 ENTRYPOINT ["/aws/docker-entrypoint.sh"]
