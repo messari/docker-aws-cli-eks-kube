@@ -23,7 +23,7 @@ RUN mv kubectl /usr/local/bin
 
 # helm
 ENV HELM_VERSION=2.15.1
-ENV HELM_SHASUM="b90303f1b4e867e23dd0a5b0a663dfb5eb3b60d8b4196072bb9ca2bee7bf0637  helm-v${HELM_VERSION}-linux-386.tar.gz"
+ENV HELM_SHASUM="b4d366bd6625477b2954941aeb7b601946aa4226af6728e3a84eac4e62a84042  helm-v${HELM_VERSION}-linux-386.tar.gz"
 RUN curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-386.tar.gz \
   && echo "${HELM_SHASUM}" | sha256sum -c \
   && tar --strip=1 -xzf ./*.tar.gz linux-386/helm -C /usr/local/bin \
