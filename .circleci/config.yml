@@ -25,7 +25,7 @@ workflows:
           <<: *all_branches_and_tags
           dockerfiles: Dockerfile
       - docker/publish:
-          <<: *semver_tag_only
+          <<: *any_tag
           image: messari/aws-cli-eks-kube
           tag: ${CIRCLE_TAG}
           requires:
