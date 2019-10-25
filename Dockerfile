@@ -2,7 +2,7 @@ FROM python:alpine
 
 ARG CLI_VERSION=1.16.138
 
-RUN apk add --no-cache bash=5.0.11-r0
+RUN apk add --no-cache bash=5.0.0-r0
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # aws-cli for configuring k8 auth
