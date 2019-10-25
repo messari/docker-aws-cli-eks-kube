@@ -19,7 +19,7 @@ RUN chmod +x ./kubectl
 RUN mv kubectl /usr/local/bin
 
 # helm
-ENV HELM_VERSION=2.13.1
+ENV HELM_VERSION=2.15.1
 ENV HELM_SHASUM="b90303f1b4e867e23dd0a5b0a663dfb5eb3b60d8b4196072bb9ca2bee7bf0637  helm-v${HELM_VERSION}-linux-386.tar.gz"
 RUN curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-386.tar.gz \
   && echo "${HELM_SHASUM}" | sha256sum -c \
