@@ -26,6 +26,7 @@ workflows:
           dockerfiles: Dockerfile
       - docker/publish:
           <<: *semver_tag_only
-          image: messari/aws-cli-eks-kube:${CIRCLE_TAG}
+          image: messari/aws-cli-eks-kube
+          tag: ${CIRCLE_TAG}
           requires:
             - docker/hadolint
