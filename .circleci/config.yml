@@ -5,6 +5,12 @@ orbs:
   docker: circleci/docker@0.5.13
 
 references:
+  all_branches_and_tags: &all_branches_and_tags
+    filters:
+      branches:
+        only: /.*/
+      tags:
+        only: /.*/
   semver_tag_only: &semver_tag_only
     filters:
       branches:
@@ -16,6 +22,7 @@ workflows:
   build-and-publish-docker-image:
     jobs:
       - docker/hadolint:
+          <<: *all_branches_and_tags
           dockerfiles: Dockerfile
       - docker/publish:
           <<: *semver_tag_only
