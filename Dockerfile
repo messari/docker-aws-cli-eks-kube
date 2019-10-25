@@ -31,8 +31,12 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION
 
 ENV HELM_HOME=/usr/local/helm
 RUN apk add --no-cache git=2.22.0-r0 \
-&& mkdir -p /usr/local/helm/plugins \
-&& helm plugin install https://github.com/futuresimple/helm-secrets --version 2.0.2
+  && mkdir -p /usr/local/helm/plugins \
+  && helm plugin install https://github.com/futuresimple/helm-secrets --version 2.0.2
+
+# kubeseal
+RUN wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.9.2/kubeseal-linux-amd64 \
+  && install -m 755 kubeseal-linux-amd64 /usr/local/bin/kubeseal
 
 COPY docker-entrypoint.sh /aws/docker-entrypoint.sh
 
