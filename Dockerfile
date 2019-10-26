@@ -5,6 +5,9 @@ ARG CLI_VERSION=1.16.138
 RUN apk add --no-cache bash=5.0.0-r0
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# SSH for git push
+RUN apk -uv add --no-cache openssh-client=8.1_p1-r0
+
 # aws-cli for configuring k8 auth
 RUN apk -uv add --no-cache curl=7.66.0-r0 groff=1.22.4-r0 jq=1.6-r0 less=551-r0 && \
     pip install --no-cache-dir awscli==$CLI_VERSION
